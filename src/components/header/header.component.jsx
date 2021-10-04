@@ -1,5 +1,6 @@
 import React from "react"
 import { auth } from "../../firebase/firebase.utils.js"
+import { connect } from "react-redux"
 
 import { Link } from "react-router-dom"
 
@@ -29,4 +30,17 @@ const Header = ({ currentUser }) => {
   )
 }
 
-export default Header
+// REDUX STUFF
+// We want to be able to pass our header component the "currentUser" property from our state
+// With redux this state comes from our root reducer
+
+// We create a function which receives state from the root reducer
+// and creates a new object with this data
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser
+})
+
+// Connect is a higher order component (a fuction which takes a component as an arguement, and boosts it into a boosted component)
+// This receives our state from "mapStateToProps" function which then passes it to the Header component
+
+export default connect(mapStateToProps)(Header)
