@@ -1,3 +1,5 @@
+import { userActionTypes } from "./user.types.js";
+
 // We set an initial state so our reducer has a state to work off of on the initial run
 // With ES6 we can pass the initial state as a default parameter
 const INITIAL_STATE = {
@@ -13,7 +15,7 @@ const INITIAL_STATE = {
 
 const userReducer = (currentState = INITIAL_STATE, action) => {
   switch (action.type) {
-    case "SET_CURRENT_USER":
+    case userActionTypes.SET_CURRENT_USER:
       return {
         ...currentState,
         currentUser: action.payload,
