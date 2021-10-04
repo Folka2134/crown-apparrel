@@ -1,13 +1,15 @@
 import React from "react"
 import { auth } from "../../firebase/firebase.utils.js"
 import { connect } from "react-redux"
-
 import { Link } from "react-router-dom"
+
+import CartIcon from "../cart-icon/cart-icon.component"
+import CartDropDown from "../cart-dropdown/cart-dropdown.component.jsx"
 
 import { ReactComponent as Logo } from "../../assets/corwn.svg"
 import "./header.styles.scss"
 
-const Header = ({ currentUser }) => {
+const Header = ({ currentUser, hidden }) => {
   return (
     <div className="header-container">
       <Link className="logo-container" to='/'>
@@ -25,7 +27,9 @@ const Header = ({ currentUser }) => {
           </Link>
          )
         }
+        <CartIcon />
       </div>
+       {hidden ? null : <CartDropDown />}
     </div>
   )
 }
@@ -36,8 +40,9 @@ const Header = ({ currentUser }) => {
 
 // We create a function which receives state from the root reducer
 // and creates a new object with this data
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser
+const mapStateToProps = ({user: {currentUser}, cart: { hidden }} ) => ({
+  currentUser,
+  hidden
 })
 
 // Connect is a higher order component (a fuction which takes a component as an arguement, and boosts it into a boosted component)
