@@ -36,10 +36,11 @@ const Header = ({ currentUser, hidden }) => {
 
 // REDUX STUFF
 // We want to be able to pass our header component the "currentUser" property from our state
-// With redux this state comes from our root reducer
+// With redux this state comes from the root reducer
 
 // We create a function which receives state from the root reducer
-// and creates a new object with this data
+// and creates a new object with that data
+// When destructuring we can pick out specific props from the state
 const mapStateToProps = ({user: {currentUser}, cart: { hidden }} ) => ({
   currentUser,
   hidden
